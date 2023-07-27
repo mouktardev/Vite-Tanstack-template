@@ -5,6 +5,10 @@ import { parse } from "zod-matter";
 export const PostsSchema = z.object({
 	id: z.coerce.number(),
 	slug: z.string().max(16),
+	image: z.object({
+		src: z.string(),
+		alt: z.string().optional(),
+	}),
 	title: z.string(),
 });
 

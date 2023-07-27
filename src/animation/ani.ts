@@ -1,5 +1,7 @@
 import { Variants } from "framer-motion";
 
+export const easing = [0.175, 0.85, 0.42, 0.96];
+
 export const containerVariants: Variants = {
 	enter: {
 		x: 0,
@@ -7,17 +9,17 @@ export const containerVariants: Variants = {
 		transition: {
 			when: "beforeChildren",
 			staggerChildren: 0.5,
-			ease: [0.175, 0.85, 0.42, 0.96],
+			ease: easing,
 		},
 	},
 	exit: { x: -100, opacity: 0, transition: { duration: 2 } },
 };
 
-export const childVariants: Variants = {
+export const slideInTop: Variants = {
 	enter: {
 		y: 0,
 		opacity: 1,
-		transition: { delay: 0.5 },
+		// transition: { delay: 0.5 },
 	},
 	exit: {
 		y: -20,
@@ -25,26 +27,42 @@ export const childVariants: Variants = {
 	},
 };
 
-export const pageVariants: Variants = {
+export const slideInLeft: Variants = {
 	enter: {
 		opacity: 1,
 		x: 0,
-		transition: { ease: "easeIn" },
+		transition: { ease: easing },
 	},
 	exit: {
 		x: -100,
 		opacity: 0,
-		transition: { ease: "easeOut" },
+		transition: { ease: easing },
 	},
 };
 
 export const skeletonVariants: Variants = {
 	enter: {
 		opacity: 1,
-		transition: { ease: "easeIn" },
+		transition: { ease: easing },
 	},
 	exit: {
 		opacity: 0,
-		transition: { ease: "easeOut" },
+		transition: { ease: easing },
+	},
+};
+
+export const pushButton: Variants = {
+	unpressed: {
+		scale: [null, 0.85, 1],
+		opacity: 1,
+	},
+	pressed: {
+		scale: 0.85,
+		opacity: 0.7,
+		transition: {
+			type: "spring",
+			duration: 0.3,
+			bounce: 0.5,
+		},
 	},
 };

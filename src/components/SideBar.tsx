@@ -6,16 +6,17 @@ export default function SideBar() {
 			<nav className="flex flex-col gap-4">
 				<img className="h-10 w-10 m-2" src="/vite.svg" alt="logo" />
 				<Link
-					className="block px-4 py-2 hover:bg-sky-950/60 cursor-pointer rounded-md"
+					className="block px-4 py-2 hover:bg-purple-950/60 cursor-pointer rounded-md"
 					to="/"
-					activeProps={{ className: "bg-sky-950 font-semibold" }}
+					activeProps={{ className: "bg-purple-950 font-semibold" }}
+					activeOptions={{ exact: true }}
 				>
 					Home
 				</Link>
 				<Link
-					className="block px-4 py-2 hover:bg-sky-950/60 cursor-pointer rounded-md"
+					className="block px-4 py-2 hover:bg-purple-950/60 cursor-pointer rounded-md"
 					to="/posts"
-					activeProps={{ className: "bg-sky-950 font-semibold" }}
+					activeProps={{ className: "bg-purple-950 font-semibold" }}
 				>
 					Posts
 				</Link>

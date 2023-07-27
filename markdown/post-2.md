@@ -1,6 +1,11 @@
 ---
 id: 2
 slug: post-2
+image:
+  {
+    src: /public/images/post-2.jpg,
+    alt: an image of fragment graffiti on a wall,
+  }
 title: Post 2
 ---
 

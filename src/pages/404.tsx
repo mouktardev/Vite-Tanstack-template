@@ -12,7 +12,11 @@ export default function NotFound({ children }: Props) {
 					404
 				</h1>
 				{children}
-				<Link className="font-semibold border rounded-full px-4 py-2" to="/">
+				<Link
+					className="font-semibold border rounded-full px-4 py-2"
+					to="/"
+					activeOptions={{ exact: true }}
+				>
 					go back Home
 				</Link>
 			</div>

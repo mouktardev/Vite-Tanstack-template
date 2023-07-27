@@ -65,8 +65,17 @@ export const posts = new Route({
 	component: lazy(() => import("./pages/posts/layout")),
 });
 
-const postsindex = new Route({
+export const postsindex = new Route({
 	getParentRoute: () => posts,
+	loader: async ({ context: { loaderClient } }) => {
+		const postsLoader = loaderClient.loaders.posts;
+		await postsLoader.load();
+		return () =>
+			useLoader({
+				loader: postsLoader,
+			});
+	},
+	pendingComponent: () => <Loading />,
 	path: "/",
 	component: lazy(() => import("./pages/posts/index")),
 });

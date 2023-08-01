@@ -1,13 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer base {
 	* {
 		@apply border-solid border-white/10;
 	}
 	body {
-		@apply min-h-screen bg-neutral-950 bg-gradient-radial-t text-neutral-300;
+		@apply h-full min-h-screen bg-neutral-950 bg-gradient-radial-t text-white;
+		@apply font-open;
 		font-feature-settings:
 			"rlig" 1,
 			"calt" 1;

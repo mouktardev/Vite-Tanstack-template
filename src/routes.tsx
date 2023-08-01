@@ -1,15 +1,19 @@
 /* eslint-disable react-refresh/only-export-components */
 import Alert from "@components/ui/Alert";
-import Loading from "@components/ui/Loading";
-import Skeleton from "@components/ui/Skeleton";
 import { PostsFrontmatter, fetchPost } from "@schema/schema";
-import { Loader, LoaderClient, useLoader } from "@tanstack/react-loaders";
+import {
+	Loader,
+	LoaderClient,
+	createLoaderOptions,
+	typedClient,
+	useLoaderInstance,
+} from "@tanstack/react-loaders";
 import {
 	ErrorComponent,
 	Outlet,
-	RootRoute,
 	Route,
 	Router,
+	RouterContext,
 	RouterProvider,
 	lazy,
 } from "@tanstack/router";
@@ -19,29 +23,36 @@ import NotFound from "./pages/404";
 import App from "./pages/_app";
 
 const postsLoader = new Loader({
+	key: "posts",
 	fn: PostsFrontmatter,
 	refetchOnWindowFocus: false,
 });
 
 const postLoader = new Loader({
+	key: "post",
 	fn: fetchPost,
-	onInvalidate: () => {
-		postsLoader.invalidate();
+	onInvalidate: ({ client }) => {
+		typedClient(client).invalidateLoader({ key: "posts" });
 	},
 	refetchOnWindowFocus: false,
 });
 
 export const loaderClient = new LoaderClient({
-	getLoaders: () => ({
-		posts: postsLoader,
-		post: postLoader,
-	}),
+	loaders: [postsLoader, postLoader],
 });
 
-const root = RootRoute.withRouterContext<{
+const routerContext = new RouterContext<{
 	loaderClient: typeof loaderClient;
-}>()({
+}>();
+
+const root = routerContext.createRootRoute({
 	component: App || Outlet,
+});
+
+const index = new Route({
+	getParentRoute: () => root,
+	path: "/",
+	component: lazy(() => import("./pages/index")),
 });
 
 const _404 = new Route({
@@ -54,28 +65,20 @@ export const posts = new Route({
 	getParentRoute: () => root,
 	path: "posts",
 	loader: async ({ context: { loaderClient } }) => {
-		const postsLoader = loaderClient.loaders.posts;
-		await postsLoader.load();
-		return () =>
-			useLoader({
-				loader: postsLoader,
-			});
+		await loaderClient.load({ key: "posts" });
+		return () => useLoaderInstance({ key: "posts" });
 	},
-	pendingComponent: () => <Loading />,
+	// pendingComponent: () => <Loading />,
 	component: lazy(() => import("./pages/posts/layout")),
 });
 
 export const postsindex = new Route({
 	getParentRoute: () => posts,
 	loader: async ({ context: { loaderClient } }) => {
-		const postsLoader = loaderClient.loaders.posts;
-		await postsLoader.load();
-		return () =>
-			useLoader({
-				loader: postsLoader,
-			});
+		await loaderClient.load({ key: "posts" });
+		return () => useLoaderInstance({ key: "posts" });
 	},
-	pendingComponent: () => <Loading />,
+	// pendingComponent: () => <Loading />,
 	path: "/",
 	component: lazy(() => import("./pages/posts/index")),
 });
@@ -84,17 +87,15 @@ export const postsid = new Route({
 	getParentRoute: () => posts,
 	path: "$postId",
 	loader: async ({ context: { loaderClient }, params: { postId } }) => {
-		const postLoader = loaderClient.loaders.post;
-		await postLoader.load({
+		const loaderOptions = createLoaderOptions({
+			key: "post",
 			variables: postId,
 		});
-		return () =>
-			useLoader({
-				loader: postLoader,
-				variables: postId,
-			});
+		await loaderClient.load(loaderOptions);
+		// Return a curried hook!
+		return () => useLoaderInstance(loaderOptions);
 	},
-	pendingComponent: () => <Skeleton />,
+	// pendingComponent: () => <Skeleton />,
 	errorComponent: ({ error }) => {
 		if (error instanceof AxiosError) {
 			return (
@@ -107,20 +108,15 @@ export const postsid = new Route({
 	},
 	component: lazy(() => import("./pages/posts/[slug]")),
 });
-const index = new Route({
-	getParentRoute: () => root,
-	path: "/",
-	component: lazy(() => import("./pages/index")),
-});
 
-const config = root.addChildren([
-	posts.addChildren([postsindex, postsid]),
+const routeTree = root.addChildren([
 	index,
 	_404,
+	posts.addChildren([postsindex, postsid]),
 ]);
 
 const router = new Router({
-	routeTree: config,
+	routeTree,
 	// defaultPreload: "intent",
 	context: {
 		loaderClient,

@@ -1,11 +1,13 @@
 import { slideInTop } from "@animation/ani";
-import { Link, useRouter } from "@tanstack/router";
+import { Link, useMatches } from "@tanstack/router";
 import { cn } from "@util/util";
-import { motion } from "framer-motion";
-import { ChevronRight, Home } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ChevronRight } from "lucide-react";
+import Image from "./ui/Image";
+
 export default function Breadcrumbs() {
-	const breadcrumbs = useRouter()
-		.state.matches.filter((d) => d.route.path !== "/")
+	const breadcrumbs = useMatches()
+		.filter((d) => d.pathname !== "/")
 		.map((match, index, array) => {
 			const id = match.id.replace(/undefined/g, "");
 			return (
@@ -13,7 +15,7 @@ export default function Breadcrumbs() {
 					key={id}
 					initial="exit"
 					animate="enter"
-					// exit="exit"
+					exit="exit"
 					variants={slideInTop}
 				>
 					<Link
@@ -35,13 +37,12 @@ export default function Breadcrumbs() {
 		});
 
 	return (
-		<motion.nav
-			layoutRoot
-			transition={{ duration: 0.3 }}
-			className="fixed z-50 top-3 px-4 py-1 rounded-md border bg-black/30 shadow-custom backdrop-blur-md bg-gradient-radial-tb"
+		<nav
+			// className="fixed z-50 top-3 px-4 py-1 rounded-md border bg-black/30 shadow-custom backdrop-blur-md bg-gradient-radial-tb"
+			className="sticky top-0 z-40 w-full px-4 border bg-black/30 shadow-custom backdrop-blur-md bg-gradient-radial-tb"
 			aria-label="Breadcrumb"
 		>
-			<ul className="flex h-10 items-center justify-center gap-4">
+			<ul className="flex h-10 items-center gap-4">
 				<li>
 					<Link
 						className={cn(
@@ -51,13 +52,12 @@ export default function Breadcrumbs() {
 						to="/"
 						activeOptions={{ exact: true }}
 					>
-						<Home className="h-5 w-5" />
+						<Image className="h-10 w-10 p-2" src="/vite.svg" alt="logo" />
 						{breadcrumbs.length > 0 && <ChevronRight className="h-4 w-4" />}
 					</Link>
 				</li>
-				{/* <AnimatePresence>{breadcrumbs}</AnimatePresence> */}
-				{breadcrumbs}
+				<AnimatePresence>{breadcrumbs}</AnimatePresence>
 			</ul>
-		</motion.nav>
+		</nav>
 	);
 }

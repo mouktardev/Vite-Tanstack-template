@@ -1,19 +1,12 @@
-import { containerVariants } from "@animation/ani";
 import { Link, Outlet } from "@tanstack/router";
-import { motion } from "framer-motion";
 import { posts } from "../../routes";
 
 export default function Layout() {
+	// const router = useRouterState();
 	const postsLoader = posts.useLoader()();
 	return (
-		<motion.div
-			variants={containerVariants}
-			initial="exit"
-			animate="enter"
-			exit="exit"
-			className="relative flex flex-1 gap-5"
-		>
-			<aside className="sticky min-w-[200px] top-0 h-screen z-40 overflow-hidden px-2 pt-[136px] border shadow-custom backdrop-blur-lg bg-gradient-radial-tl">
+		<div className="relative flex flex-1 gap-5">
+			<aside className="sticky min-w-[200px] top-[42px] h-[calc(100vh-42px)] z-40 overflow-hidden px-2 pt-[115px] border shadow-custom backdrop-blur-lg bg-gradient-radial-tl">
 				<ul className="flex flex-col gap-4">
 					<li>
 						<Link
@@ -24,7 +17,7 @@ export default function Layout() {
 							<h1>Posts</h1>
 						</Link>
 					</li>
-					{postsLoader.state.data.map((post) => (
+					{postsLoader.data?.map((post) => (
 						<li key={post.id}>
 							<Link
 								to="/posts/$postId"
@@ -40,9 +33,7 @@ export default function Layout() {
 					))}
 				</ul>
 			</aside>
-			<div className="container mx-auto px-5 pt-20">
-				<Outlet />
-			</div>
-		</motion.div>
+			<Outlet />
+		</div>
 	);
 }

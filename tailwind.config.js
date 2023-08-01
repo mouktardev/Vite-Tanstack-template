@@ -1,3 +1,5 @@
+import { fontFamily as _fontFamily } from "tailwindcss/defaultTheme";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -7,6 +9,9 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      fontFamily: {
+        open: ['"Open Sans"', ..._fontFamily.sans],
+      },
       backgroundImage: {
         'gradient-radial-t': 'radial-gradient(103.72% 100px at 50% 0%,rgba(68,86,112,0.5) 0%,rgba(255,255,255,0) 100%)',
         'gradient-radial-tb': 'radial-gradient(103.72% 46.58% at 50% 100%,rgba(68,86,112,0.5) 0%,rgba(255,255,255,0) 100%),radial-gradient(103.72% 46.58% at 50% 0%,rgba(68,86,112,0.5) 0%,rgba(255,255,255,0) 100%)',

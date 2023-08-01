@@ -49,7 +49,7 @@ export default function TableOfContent({ slug }: Props) {
 	}, []);
 
 	return (
-		<ul className="sticky w-64 h-full top-10 overflow-auto p-4 mt-10 space-y-5 border shadow-custom backdrop-blur-lg bg-gradient-radial-tl rounded-lg">
+		<ul className="sticky w-64 h-full top-20 overflow-auto p-4 mt-10 space-y-5 border shadow-custom backdrop-blur-lg bg-gradient-radial-tl rounded-lg">
 			{headings.map((heading) => (
 				<li
 					key={heading.id}
@@ -77,54 +77,5 @@ export default function TableOfContent({ slug }: Props) {
 				</li>
 			))}
 		</ul>
-		// <ul>
-		// 	{headings.map((heading) => (
-		// 		<li
-		// 			key={heading.id}
-		// 			className={heading.id === activeId ? "text-purple-500" : ""}
-		// 		>
-		// 			<Link
-		// 				to="/posts/$postId"
-		// 				params={{
-		// 					postId: slug,
-		// 				}}
-		// 				hash={`${heading.id}`}
-		// 				// onClick={(e) => {
-		// 				// 	e.preventDefault();
-		// 				// 	document.querySelector(`#${heading.id}`)?.scrollIntoView({
-		// 				// 		behavior: "smooth",
-		// 				// 	});
-		// 				// }}
-		// 			>
-		// 				{heading.title}
-		// 			</Link>
-		// 			{/* {heading.items.length > 0 && (
-		// 				<ul>
-		// 					{heading.items.map((child) => (
-		// 						<li
-		// 							key={child.id}
-		// 							className={cn(
-		// 								"pl-4",
-		// 								child.id === activeId ? "text-purple-500" : ""
-		// 							)}
-		// 						>
-		// 							<Link
-		// 								hash={`${child.id}`}
-		// 								// onClick={(e) => {
-		// 								// 	e.preventDefault();
-		// 								// 	document.querySelector(`#${child.id}`)?.scrollIntoView({
-		// 								// 		behavior: "smooth",
-		// 								// 	});
-		// 								// }}
-		// 							>
-		// 								{child.title}
-		// 							</Link>
-		// 						</li>
-		// 					))}
-		// 				</ul>
-		// 			)} */}
-		// 		</li>
-		// 	))}
-		// </ul>
 	);
 }

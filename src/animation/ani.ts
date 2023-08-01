@@ -40,14 +40,25 @@ export const slideInLeft: Variants = {
 	},
 };
 
-export const skeletonVariants: Variants = {
-	enter: {
-		opacity: 1,
-		transition: { ease: easing },
+export const WidthLeft: Variants = {
+	hidden: { width: "54px" },
+	visible: {
+		width: "160px",
+		transition: {
+			ease: "easeIn",
+			delayChildren: 0.3,
+		},
 	},
-	exit: {
-		opacity: 0,
-		transition: { ease: easing },
+};
+
+export const Fade: Variants = {
+	hidden: { opacity: 0, display: "none" },
+	visible: {
+		opacity: 1,
+		display: "block",
+		transition: {
+			delay: 0.3,
+		},
 	},
 };
 

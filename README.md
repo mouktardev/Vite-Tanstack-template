@@ -10,9 +10,13 @@
 - [TypeScript](https://www.typescriptlang.org)
 - [Tanstack-router](https://tanstack.com/router/v1)
 - [Tanstack-Loader](https://tanstack.com/)
+- [react-markdown](https://github.com/remarkjs/react-markdown) React component to render markdown.
+  - [remark-gfm](https://github.com/remarkjs/remark-gfm)remark plugin to support GFM (autolink literals, footnotes, strikethrough, tables, tasklists).
+  - [react-syntax-highlighter](https://github.com/react-syntax-highlighter/react-syntax-highlighter) Syntax highlighting component for React
 - [zod-matter](https://github.com/HiDeoo/zod-matter) parse and validate frontmatter a tiny wrapper for gray-matter
+- [lucide-react](https://lucide.dev/) an open source icon library.
 - [framer-motion](https://github.com/framer/motion) an open source motion library for React, made by Framer.
-<!-- - [shadcn/ui](https://github.com/shadcn/ui) ui elements in `src/components/ui` -->
+- [nanostores](https://github.com/nanostores/nanostores) an open source state manager.
 
 ### File based structure:
 

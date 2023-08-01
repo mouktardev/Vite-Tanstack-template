@@ -2,10 +2,7 @@
 id: 1
 slug: post-1
 image:
-  {
-    src: /public/images/post-1.jpg,
-    alt: a collection of lego's with different colors,
-  }
+  { src: /images/post-1.jpg, alt: a collection of lego's with different colors }
 title: Post 1
 ---
 

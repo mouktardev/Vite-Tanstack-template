@@ -1,31 +1,22 @@
-import { containerVariants } from "@animation/ani";
 import { Link } from "@tanstack/router";
-import { motion } from "framer-motion";
 import { Balancer } from "react-wrap-balancer";
-
 export default function Home() {
 	return (
-		<motion.div
-			variants={containerVariants}
-			initial="exit"
-			animate="enter"
-			exit="exit"
-			className="container mx-auto max-w-[800px] px-5 pt-20"
-		>
-			<div className="w-full flex flex-col justify-center items-center gap-4">
-				<h1 className="text-3xl my-10 font-extrabold tracking-tight max-w-lg">
+		<div className="container  max-w-[800px] px-5 pt-10">
+			<div className="space-y-4">
+				<h1 className="text-4xl font-extrabold leading-tight tracking-tight">
 					<Balancer>
-						Boilerplate Template Vite React with File Based routing Breadcrumps
-						and many more
+						SPA + Vite + React + TanStack Router + TanStack Loader
 					</Balancer>
 				</h1>
+				<p> A file based routing with breadcrumps loaders and many more</p>
 				<Link
-					className="font-semibold border rounded-full px-4 py-2"
+					className="inline-block font-semibold border rounded-full px-4 py-2"
 					to="/posts"
 				>
 					click to go to Posts
 				</Link>
 			</div>
-		</motion.div>
+		</div>
 	);
 }

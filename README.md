@@ -30,10 +30,6 @@
 - `src/schema.tsx` zod schema and fetch method's for posts.
 - `src/component/breadcrumbs.tsx`
 
-### Vite configuration
-
-- To let `gray-matter` work in vite i had to configure it here is a reference [solution](https://github.com/jonschlinkert/gray-matter/issues/143)
-
 ## Basic commands
 
 All commands are run from the root of the project, from a terminal:

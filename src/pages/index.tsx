@@ -2,7 +2,7 @@ import { Link } from "@tanstack/router";
 import { Balancer } from "react-wrap-balancer";
 export default function Home() {
 	return (
-		<div className="container  max-w-[800px] px-5 pt-10">
+		<div className="container m-5 pt-10">
 			<div className="space-y-4">
 				<h1 className="text-4xl font-extrabold leading-tight tracking-tight">
 					<Balancer>

@@ -8,12 +8,12 @@ export default function Posts() {
 	const postsLoader = postsindex.useLoader()();
 
 	return (
-		<div className="container max-w-[800px] px-5 pt-10">
+		<div className="container m-5 pt-10">
 			<h1 className="text-3xl my-10 font-extrabold tracking-tight">
 				<Balancer>Welcome to your Posts Homepage</Balancer>
 			</h1>
 			<div className="flex gap-4">
-				{postsLoader.data?.map((post) => (
+				{postsLoader.data.map((post) => (
 					<Link
 						key={post.id}
 						to="/posts/$postId"

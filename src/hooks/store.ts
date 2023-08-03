@@ -1,5 +1,4 @@
 import { atom } from "nanostores";
-export const sidebar = atom<boolean>(true);
-export function toggleSidebar() {
-	sidebar.set(!sidebar.get());
-}
+
+export const theme = atom<boolean>(localStorage.getItem("theme") === "dark");
+export const toggleTheme = () => theme.set(!theme.get());

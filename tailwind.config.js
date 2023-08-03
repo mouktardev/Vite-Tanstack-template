@@ -15,6 +15,7 @@ module.exports = {
       backgroundImage: {
         'gradient-radial-t': 'radial-gradient(103.72% 100px at 50% 0%,rgba(68,86,112,0.5) 0%,rgba(255,255,255,0) 100%)',
         'gradient-radial-tb': 'radial-gradient(103.72% 46.58% at 50% 100%,rgba(68,86,112,0.5) 0%,rgba(255,255,255,0) 100%),radial-gradient(103.72% 46.58% at 50% 0%,rgba(68,86,112,0.5) 0%,rgba(255,255,255,0) 100%)',
+        'gradient-radial-tb-light': 'radial-gradient(103.72% 46.58% at 50% 100%,rgba(209, 196, 233,0.5) 0%,rgba(255,255,255,0) 100%),radial-gradient(103.72% 46.58% at 50% 0%,rgba(209, 196, 233,0.5) 0%,rgba(255,255,255,0) 100%)',
         'gradient-radial-tl': 'radial-gradient(103.72% 0px at 50% 0%,rgba(68,86,112,0.5) 0%,rgba(255,255,255,0) 100%),radial-gradient(50% 50% at -30% 50%,rgba(68,86,112,0.5) 0%,rgba(255,255,255,0) 100%)',
       },
       boxShadow: {

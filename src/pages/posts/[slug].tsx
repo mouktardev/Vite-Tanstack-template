@@ -46,7 +46,7 @@ export default function PostPage() {
 				Back to Posts
 			</Link>
 			<div className="relative flex gap-6">
-				<div className="w-full p-5 mt-10 text-justify prose prose-invert prose-sm md:prose-lg prose-pre:bg-[rgba(40,44,52,1)] border shadow-custom backdrop-blur-lg bg-gradient-radial-tl rounded-lg">
+				<div className="w-full p-5 mt-10 text-justify prose dark:prose-invert prose-sm md:prose-lg prose-pre:bg-[rgba(40,44,52,1)] border shadow-custom backdrop-blur-lg bg-gradient-radial-tl rounded-lg">
 					<ReactMarkdown
 						children={content}
 						components={{

@@ -1,16 +1,14 @@
 import Image from "@components/ui/Image";
 import { Link } from "@tanstack/router";
 import { motion } from "framer-motion";
-import Balancer from "react-wrap-balancer";
 import { postsindex } from "../../routes";
 
 export default function Posts() {
 	const postsLoader = postsindex.useLoader()();
-
 	return (
 		<div className="container m-5 pt-10">
 			<h1 className="text-3xl my-10 font-extrabold tracking-tight">
-				<Balancer>Welcome to your Posts Homepage</Balancer>
+				Welcome to your Posts Homepage
 			</h1>
 			<div className="flex gap-4">
 				{postsLoader.data.map((post) => (
@@ -21,7 +19,7 @@ export default function Posts() {
 							postId: post.slug,
 						}}
 						className="block py-2 hover:underline underline-offset-8 cursor-pointer"
-						activeProps={{ className: "bg-purple-950 font-semibold" }}
+						activeProps={{ className: "font-semibold" }}
 					>
 						<div className="overflow-hidden border rounded-xl">
 							<motion.div

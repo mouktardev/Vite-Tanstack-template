@@ -14,7 +14,7 @@ export const PostsSchema = z.object({
 
 export async function PostsFrontmatter() {
 	console.log(`Fetching posts`);
-	const markdownFiles = import.meta.glob("/markdown/*.md");
+	const markdownFiles = import.meta.glob("/src/markdown/*.md", { eager: true });
 	const frontmatters = [];
 	for (const post in markdownFiles) {
 		const response = await axios.get(post);
@@ -29,7 +29,7 @@ export async function fetchPost(postId: string) {
 	console.log(`Fetching post with id ${postId}...`);
 	// await new Promise((r) => setTimeout(r, 5000));
 	const post = await axios
-		.get(`/markdown/${postId}.md`)
+		.get(`/src/markdown/${postId}.md`)
 		.then((res) => res.data);
 	if (!post) {
 		throw new Error(`Post with id "${postId}" not found!`);

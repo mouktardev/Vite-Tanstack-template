@@ -1,5 +1,7 @@
 /* eslint-disable react-refresh/only-export-components */
 import Alert from "@components/ui/Alert";
+import Loading from "@components/ui/Loading";
+import Skeleton from "@components/ui/Skeleton";
 import { PostsFrontmatter, fetchPost } from "@schema/schema";
 import {
 	Loader,
@@ -68,7 +70,17 @@ export const posts = new Route({
 		await loaderClient.load({ key: "posts" });
 		return () => useLoaderInstance({ key: "posts" });
 	},
-	// pendingComponent: () => <Loading />,
+	errorComponent: ({ error }) => {
+		if (error instanceof AxiosError) {
+			return (
+				<NotFound>
+					<Alert>{error.message}</Alert>
+				</NotFound>
+			);
+		}
+		return <ErrorComponent error={error} />;
+	},
+	pendingComponent: () => <Loading />,
 	component: lazy(() => import("./pages/posts/layout")),
 });
 
@@ -78,7 +90,17 @@ export const postsindex = new Route({
 		await loaderClient.load({ key: "posts" });
 		return () => useLoaderInstance({ key: "posts" });
 	},
-	// pendingComponent: () => <Loading />,
+	errorComponent: ({ error }) => {
+		if (error instanceof AxiosError) {
+			return (
+				<NotFound>
+					<Alert>{error.message}</Alert>
+				</NotFound>
+			);
+		}
+		return <ErrorComponent error={error} />;
+	},
+	pendingComponent: () => <Loading />,
 	path: "/",
 	component: lazy(() => import("./pages/posts/index")),
 });
@@ -95,7 +117,6 @@ export const postsid = new Route({
 		// Return a curried hook!
 		return () => useLoaderInstance(loaderOptions);
 	},
-	// pendingComponent: () => <Skeleton />,
 	errorComponent: ({ error }) => {
 		if (error instanceof AxiosError) {
 			return (
@@ -106,6 +127,7 @@ export const postsid = new Route({
 		}
 		return <ErrorComponent error={error} />;
 	},
+	pendingComponent: () => <Skeleton />,
 	component: lazy(() => import("./pages/posts/[slug]")),
 });
 

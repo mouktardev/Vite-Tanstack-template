@@ -1,13 +1,10 @@
 import { Link } from "@tanstack/router";
-import { Balancer } from "react-wrap-balancer";
 export default function Home() {
 	return (
 		<div className="container m-5 pt-10">
 			<div className="space-y-4">
 				<h1 className="text-4xl font-extrabold leading-tight tracking-tight">
-					<Balancer>
-						SPA + Vite + React + TanStack Router + TanStack Loader
-					</Balancer>
+					SPA + Vite + React + TanStack Router + TanStack Loader
 				</h1>
 				<p> A file based routing with breadcrumps loaders and many more</p>
 				<Link

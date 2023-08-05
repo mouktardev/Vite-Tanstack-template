@@ -17,7 +17,7 @@ import {
 	Router,
 	RouterContext,
 	RouterProvider,
-	lazy,
+	lazyRouteComponent,
 } from "@tanstack/router";
 import { AxiosError } from "axios";
 import { Fragment } from "react";
@@ -54,7 +54,7 @@ const root = routerContext.createRootRoute({
 const index = new Route({
 	getParentRoute: () => root,
 	path: "/",
-	component: lazy(() => import("./pages/index")),
+	component: lazyRouteComponent(() => import("./pages/index")),
 });
 
 const _404 = new Route({
@@ -70,39 +70,21 @@ export const posts = new Route({
 		await loaderClient.load({ key: "posts" });
 		return () => useLoaderInstance({ key: "posts" });
 	},
-	errorComponent: ({ error }) => {
-		if (error instanceof AxiosError) {
-			return (
-				<NotFound>
-					<Alert>{error.message}</Alert>
-				</NotFound>
-			);
-		}
-		return <ErrorComponent error={error} />;
-	},
+	component: lazyRouteComponent(() => import("./pages/posts/layout")),
 	pendingComponent: () => <Loading />,
-	component: lazy(() => import("./pages/posts/layout")),
+	// wrapInSuspense: true,
 });
 
 export const postsindex = new Route({
 	getParentRoute: () => posts,
+	path: "/",
 	loader: async ({ context: { loaderClient } }) => {
 		await loaderClient.load({ key: "posts" });
 		return () => useLoaderInstance({ key: "posts" });
 	},
-	errorComponent: ({ error }) => {
-		if (error instanceof AxiosError) {
-			return (
-				<NotFound>
-					<Alert>{error.message}</Alert>
-				</NotFound>
-			);
-		}
-		return <ErrorComponent error={error} />;
-	},
+	component: lazyRouteComponent(() => import("./pages/posts/index")),
 	pendingComponent: () => <Loading />,
-	path: "/",
-	component: lazy(() => import("./pages/posts/index")),
+	wrapInSuspense: true,
 });
 
 export const postsid = new Route({
@@ -127,8 +109,9 @@ export const postsid = new Route({
 		}
 		return <ErrorComponent error={error} />;
 	},
+	component: lazyRouteComponent(() => import("./pages/posts/[slug]")),
 	pendingComponent: () => <Skeleton />,
-	component: lazy(() => import("./pages/posts/[slug]")),
+	wrapInSuspense: true,
 });
 
 const routeTree = root.addChildren([
@@ -140,6 +123,13 @@ const routeTree = root.addChildren([
 const router = new Router({
 	routeTree,
 	// defaultPreload: "intent",
+	onRouteChange: () => {
+		window.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: "instant",
+		});
+	},
 	context: {
 		loaderClient,
 	},

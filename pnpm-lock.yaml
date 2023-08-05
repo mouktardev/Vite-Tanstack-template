@@ -11,8 +11,8 @@ dependencies:
     specifier: 0.0.1-beta.134
     version: 0.0.1-beta.134(react-dom@18.2.0)(react@18.2.0)
   '@tanstack/router':
-    specifier: 0.0.1-beta.134
-    version: 0.0.1-beta.134(react-dom@18.2.0)(react@18.2.0)
+    specifier: 0.0.1-beta.137
+    version: 0.0.1-beta.137(react-dom@18.2.0)(react@18.2.0)
   axios:
     specifier: ^1.4.0
     version: 1.4.0
@@ -806,8 +806,8 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  /@tanstack/router@0.0.1-beta.134(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-FjjwEbu4clJD4STiFMliq+Kfd8Id57WBfFu6U9vdXncbxiESsT7uXLiLlYQmtdp7UH5Y1qhDFkzHjcpS1343jg==}
+  /@tanstack/router@0.0.1-beta.137(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-OGx/jvlOSQRu74vY60nossUw07t2UX+KcIrcGVlcqd9tm760CQJqQbJ/gk4UP+F+JGaV+pDWs2o52hJ4/fqVEQ==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16'

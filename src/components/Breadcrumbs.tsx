@@ -38,7 +38,6 @@ export default function Breadcrumbs() {
 
 	return (
 		<nav
-			// className="fixed z-50 top-3 px-4 py-1 rounded-md border bg-black/30 shadow-custom backdrop-blur-md bg-gradient-radial-tb"
 			className="sticky top-0 z-40 w-full px-4 border dark:bg-black/30 shadow-custom backdrop-blur-md bg-gradient-radial-tb-light dark:bg-gradient-radial-tb"
 			aria-label="Breadcrumb"
 		>

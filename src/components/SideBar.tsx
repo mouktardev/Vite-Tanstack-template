@@ -54,6 +54,7 @@ export default function SideBar() {
 					activeProps={{
 						className: "bg-purple-300 dark:bg-purple-950 font-semibold",
 					}}
+					activeOptions={{ exact: true }}
 				>
 					<Book className="w-5 h-5" />
 					<motion.p

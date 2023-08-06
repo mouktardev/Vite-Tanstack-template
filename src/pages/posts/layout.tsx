@@ -1,18 +1,18 @@
 import { Fade, WidthLeft } from "@animation/ani";
 import Button from "@components/ui/Button";
+import { useLoaderInstance } from "@tanstack/react-loaders";
 import { Link, Outlet } from "@tanstack/router";
 import { motion } from "framer-motion";
 import { ChevronLeft, LayoutGrid, Newspaper } from "lucide-react";
 import { useCallback, useState } from "react";
-import { posts } from "../../routes";
 
 export default function Layout() {
+	const { data: posts } = useLoaderInstance({ key: "posts" });
 	const [showSidebar, setShowSidebar] = useState(true);
 	const toggleSidebar = useCallback(
 		() => setShowSidebar((value) => !value),
 		[]
 	);
-	const postsLoader = posts.useLoader()();
 	return (
 		<div className="relative flex flex-1 gap-5">
 			<motion.aside
@@ -40,6 +40,8 @@ export default function Layout() {
 							className: "bg-purple-300 dark:bg-purple-950 font-semibold",
 						}}
 						to="/posts"
+						search={{ undefined }}
+						activeOptions={{ exact: true }}
 					>
 						<LayoutGrid className="w-5 h-5" />
 						<motion.p
@@ -50,7 +52,7 @@ export default function Layout() {
 							All
 						</motion.p>
 					</Link>
-					{postsLoader.data.map((post) => (
+					{posts.map((post) => (
 						<Link
 							key={post.id}
 							to="/posts/$postId"

@@ -1,17 +1,19 @@
 import Image from "@components/ui/Image";
+import { useLoaderInstance } from "@tanstack/react-loaders";
 import { Link } from "@tanstack/router";
 import { motion } from "framer-motion";
-import { postsindex } from "../../routes";
 
 export default function Posts() {
-	const postsLoader = postsindex.useLoader()();
+	// const postsLoader = postsindex.useLoader()();
+	const { data: posts } = useLoaderInstance({ key: "posts" });
+
 	return (
 		<div className="container m-5 pt-10">
 			<h1 className="text-3xl my-10 font-extrabold tracking-tight">
 				Welcome to your Posts Homepage
 			</h1>
 			<div className="flex gap-4">
-				{postsLoader.data.map((post) => (
+				{posts.map((post) => (
 					<Link
 						key={post.id}
 						to="/posts/$postId"
@@ -35,9 +37,6 @@ export default function Posts() {
 							</motion.div>
 						</div>
 						<p className="text-2xl font-semibold">{post.title}</p>
-						<span className="text-xs dark:text-gray-400">
-							{/* {formatDate(article.attributes.publishedAt)}  */}
-						</span>
 					</Link>
 				))}
 			</div>

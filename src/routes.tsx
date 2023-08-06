@@ -1,7 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import Alert from "@components/ui/Alert";
 import Loading from "@components/ui/Loading";
-import Skeleton from "@components/ui/Skeleton";
 import { PostsFrontmatter, fetchPost } from "@schema/schema";
 import {
 	Loader,
@@ -63,7 +62,7 @@ const _404 = new Route({
 	component: NotFound || Fragment,
 });
 
-export const posts = new Route({
+const posts = new Route({
 	getParentRoute: () => root,
 	path: "posts",
 	loader: async ({ context: { loaderClient } }) => {
@@ -75,16 +74,12 @@ export const posts = new Route({
 	// wrapInSuspense: true,
 });
 
-export const postsindex = new Route({
+const postsindex = new Route({
 	getParentRoute: () => posts,
 	path: "/",
-	loader: async ({ context: { loaderClient } }) => {
-		await loaderClient.load({ key: "posts" });
-		return () => useLoaderInstance({ key: "posts" });
-	},
 	component: lazyRouteComponent(() => import("./pages/posts/index")),
 	pendingComponent: () => <Loading />,
-	wrapInSuspense: true,
+	// wrapInSuspense: true,
 });
 
 export const postsid = new Route({
@@ -110,8 +105,8 @@ export const postsid = new Route({
 		return <ErrorComponent error={error} />;
 	},
 	component: lazyRouteComponent(() => import("./pages/posts/[slug]")),
-	pendingComponent: () => <Skeleton />,
-	wrapInSuspense: true,
+	pendingComponent: () => <Loading />,
+	// wrapInSuspense: true,
 });
 
 const routeTree = root.addChildren([

@@ -1,13 +1,11 @@
 /* eslint-disable react-refresh/only-export-components */
 import Alert from "@components/ui/Alert";
-import Loading from "@components/ui/Loading";
 import { PostsFrontmatter, fetchPost } from "@schema/schema";
 import {
 	Loader,
 	LoaderClient,
 	createLoaderOptions,
 	typedClient,
-	useLoaderInstance,
 } from "@tanstack/react-loaders";
 import {
 	ErrorComponent,
@@ -15,7 +13,6 @@ import {
 	Route,
 	Router,
 	RouterContext,
-	RouterProvider,
 	lazyRouteComponent,
 } from "@tanstack/router";
 import { AxiosError } from "axios";
@@ -53,7 +50,7 @@ const root = routerContext.createRootRoute({
 const index = new Route({
 	getParentRoute: () => root,
 	path: "/",
-	component: lazyRouteComponent(() => import("./pages/index")),
+	component: lazyRouteComponent(() => import("./pages/index"), "Home"),
 });
 
 const _404 = new Route({
@@ -62,37 +59,37 @@ const _404 = new Route({
 	component: NotFound || Fragment,
 });
 
-const posts = new Route({
+const postsRoute = new Route({
 	getParentRoute: () => root,
 	path: "posts",
 	loader: async ({ context: { loaderClient } }) => {
 		await loaderClient.load({ key: "posts" });
-		return () => useLoaderInstance({ key: "posts" });
 	},
-	component: lazyRouteComponent(() => import("./pages/posts/layout")),
-	pendingComponent: () => <Loading />,
+	// pendingComponent: () => <Loading />,
 	// wrapInSuspense: true,
+}).update({
+	component: lazyRouteComponent(() => import("./pages/posts/layout"), "Layout"),
 });
 
 const postsindex = new Route({
-	getParentRoute: () => posts,
+	getParentRoute: () => postsRoute,
 	path: "/",
-	component: lazyRouteComponent(() => import("./pages/posts/index")),
-	pendingComponent: () => <Loading />,
-	// wrapInSuspense: true,
+	component: lazyRouteComponent(() => import("./pages/posts/index"), "Posts"),
 });
 
-export const postsid = new Route({
-	getParentRoute: () => posts,
+export const postRoute = new Route({
+	getParentRoute: () => postsRoute,
 	path: "$postId",
-	loader: async ({ context: { loaderClient }, params: { postId } }) => {
-		const loaderOptions = createLoaderOptions({
-			key: "post",
-			variables: postId,
-		});
+	getContext: ({ params: { postId } }) => {
+		return {
+			loaderOptions: createLoaderOptions({
+				key: "post",
+				variables: postId,
+			}),
+		};
+	},
+	loader: async ({ context: { loaderClient, loaderOptions } }) => {
 		await loaderClient.load(loaderOptions);
-		// Return a curried hook!
-		return () => useLoaderInstance(loaderOptions);
 	},
 	errorComponent: ({ error }) => {
 		if (error instanceof AxiosError) {
@@ -104,18 +101,22 @@ export const postsid = new Route({
 		}
 		return <ErrorComponent error={error} />;
 	},
-	component: lazyRouteComponent(() => import("./pages/posts/[slug]")),
-	pendingComponent: () => <Loading />,
+	// pendingComponent: () => <Loading />,
 	// wrapInSuspense: true,
+}).update({
+	component: lazyRouteComponent(
+		() => import("./pages/posts/[slug]"),
+		"PostPage"
+	),
 });
 
 const routeTree = root.addChildren([
 	index,
 	_404,
-	posts.addChildren([postsindex, postsid]),
+	postsRoute.addChildren([postsindex, postRoute]),
 ]);
 
-const router = new Router({
+export const router = new Router({
 	routeTree,
 	// defaultPreload: "intent",
 	onRouteChange: () => {
@@ -134,8 +135,6 @@ const router = new Router({
 	// 	</div>
 	// ),
 });
-
-export const Routes = () => <RouterProvider router={router} />;
 
 declare module "@tanstack/router" {
 	interface Register {

@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft, LayoutGrid, Newspaper } from "lucide-react";
 import { useCallback, useState } from "react";
 
-export default function Layout() {
+export const Layout = () => {
 	const { data: posts } = useLoaderInstance({ key: "posts" });
 	const [showSidebar, setShowSidebar] = useState(true);
 	const toggleSidebar = useCallback(
@@ -79,4 +79,4 @@ export default function Layout() {
 			<Outlet />
 		</div>
 	);
-}
+};

@@ -2,7 +2,8 @@ import CodeCopy from "@components/CodeCopy";
 import TableOfContent from "@components/TableOfContent";
 import Image from "@components/ui/Image";
 import { PostsSchema } from "@schema/schema";
-import { Link } from "@tanstack/router";
+import { useLoaderInstance } from "@tanstack/react-loaders";
+import { ComponentFromRoute, Link } from "@tanstack/router";
 import { cn, flatten } from "@util/util";
 import { ChevronLeft } from "lucide-react";
 import React, { ReactNode } from "react";
@@ -10,7 +11,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { parse } from "zod-matter";
-import { postsid } from "../../routes";
+import { postRoute } from "../../routes";
 
 interface HeadingRendererProps {
 	level: number;
@@ -28,8 +29,12 @@ const HeadingRenderer = (props: HeadingRendererProps) => {
 	);
 };
 
-export default function PostPage() {
-	const { data: post } = postsid.useLoader()();
+export const PostPage: ComponentFromRoute<typeof postRoute> = ({
+	useRouteContext,
+}) => {
+	// const { data: post } = postsid.useLoader()();
+	const { loaderOptions } = useRouteContext();
+	const { data: post } = useLoaderInstance(loaderOptions);
 	const { data: frontmatter, content } = parse(post, PostsSchema);
 
 	return (
@@ -86,4 +91,4 @@ export default function PostPage() {
 			</div>
 		</div>
 	);
-}
+};

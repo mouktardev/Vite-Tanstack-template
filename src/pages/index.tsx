@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/router";
-export default function Home() {
+export const Home = () => {
 	return (
 		<div className="container m-5 pt-10">
 			<div className="space-y-4">
@@ -16,4 +16,4 @@ export default function Home() {
 			</div>
 		</div>
 	);
-}
+};

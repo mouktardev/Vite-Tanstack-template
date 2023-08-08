@@ -3,10 +3,8 @@ import { useLoaderInstance } from "@tanstack/react-loaders";
 import { Link } from "@tanstack/router";
 import { motion } from "framer-motion";
 
-export default function Posts() {
-	// const postsLoader = postsindex.useLoader()();
+export const Posts = () => {
 	const { data: posts } = useLoaderInstance({ key: "posts" });
-
 	return (
 		<div className="container m-5 pt-10">
 			<h1 className="text-3xl my-10 font-extrabold tracking-tight">
@@ -42,4 +40,4 @@ export default function Posts() {
 			</div>
 		</div>
 	);
-}
+};

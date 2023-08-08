@@ -13,9 +13,9 @@
 	},
 	"dependencies": {
 		"@nanostores/react": "^0.7.1",
-		"@tanstack/react-actions": "0.0.1-beta.134",
+		"@tanstack/react-actions": "0.0.1-beta.141",
 		"@tanstack/react-loaders": "0.0.1-beta.134",
-		"@tanstack/router": "0.0.1-beta.139",
+		"@tanstack/router": "0.0.1-beta.142",
 		"axios": "^1.4.0",
 		"clsx": "^1.2.1",
 		"framer-motion": "^10.12.21",

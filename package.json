@@ -8,8 +8,8 @@
 		"build": "tsc && vite build",
 		"lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",
-		"format": "prettier --write --plugin-search-dir=. .",
-		"check": "prettier --check --plugin-search-dir=. ."
+		"check": "prettier --check --plugin-search-dir=. .",
+		"format": "prettier --write --plugin-search-dir=. ."
 	},
 	"dependencies": {
 		"@nanostores/react": "^0.7.1",

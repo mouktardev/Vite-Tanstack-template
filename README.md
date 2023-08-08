@@ -34,13 +34,14 @@
 
 All commands are run from the root of the project, from a terminal:
 
-| Command        | Action                                                           |
-| :------------- | :--------------------------------------------------------------- |
-| `pnpm install` | Installs dependencies                                            |
-| `pnpm dev`     | Starts local dev server at `localhost:1520` and lunch app window |
-| `pnpm build`   | Build your production app to `./dist/`                           |
-| `pnpm format`  | prettier format files                                            |
-| `pnpm check`   | prettier check if files are formatted                            |
+| Command        | Action                                                                           |
+| :------------- | :------------------------------------------------------------------------------- |
+| `pnpm install` | Installs dependencies                                                            |
+| `pnpm dev`     | Starts local dev server at `localhost:1521` and lunch app window                 |
+| `pnpm build`   | Build your production app to `./dist/`                                           |
+| `pnpm lint`    | runs eslint to identifying if problematic patterns found in your JavaScript code |
+| `pnpm check`   | prettier check if files are formatted                                            |
+| `pnpm format`  | prettier format files                                                            |
 
 ---
 

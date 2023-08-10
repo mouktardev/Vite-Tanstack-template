@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import Alert from "@components/ui/Alert";
 import { PostsFrontmatter, fetchPost } from "@schema/schema";
 import {
